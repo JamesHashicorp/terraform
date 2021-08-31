@@ -1,11 +1,15 @@
-variable "instance_name" {
-  description = "Value of the Name tag for the EC2 Instance"
-  type = string
-  default = "UnnamedServer"
+  
+variable "region" {
+  description = "AWS region"
+  default     = "us-west-1"
 }
 
-variable "workspace" {
-    description = "Name of workspace to be applied against"
-    type = string
-    default = "AWS-IaaS-Development"
+variable "instance_type" {
+  description = "Type of EC2 instance to provision"
+  default     = "t2.micro"
+}
+
+variable "instance_name" {
+  description = "EC2 instance name"
+  default     = "Provisioned by Terraform"
 }

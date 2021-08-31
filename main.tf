@@ -1,22 +1,5 @@
-terraform {
-  backend "remote" {
-    organization = "JamesHashicorp"
-    workspaces {
-      name = var.workspace
-    }
-  }
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.27"
-    }
-  }
-  required_version = ">= 0.14.9"
-}
-
 provider "aws" {
-  region  = "us-west-2"
+  region = var.region
 }
 
 data "aws_ami" "ubuntu" {
@@ -37,7 +20,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "ubuntu" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
 
   tags = {
     Name = var.instance_name

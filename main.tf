@@ -1,22 +1,12 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "3.5.0"
-    }
-  }
-}
-
 provider "google" {
   project = "jameshashicorp"
-  region  = "us-central1"
-  zone    = "us-central1-c"
+  region  = "us-east1"
 }
 
 resource "google_compute_instance" "vm_instance" {
   name         = "terraform-instance"
   machine_type = "f1-micro"
-  zone         = "us-central1-c"
+  zone         = "us-east1-b"
 
   boot_disk {
     initialize_params {

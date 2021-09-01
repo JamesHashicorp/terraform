@@ -1,29 +1,28 @@
-terraform {
-  backend "remote" {
-    organization = "JamesHashicorp"
-    workspaces {
-      name = var.workspace
+provider "google" {
+  project = "jameshashicorp"
+  region  = "us-central1"
+  zone    = "us-central1-c"
+}
+
+resource "google_compute_instance" "vm_instance" {
+  name         = "terraform-instance"
+  machine_type = "f1-micro"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
     }
   }
 
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.27"
+  network_interface {
+    # A default network is created for all GCP projects
+    network = google_compute_network.vpc_network.self_link
+    access_config {
     }
   }
-  required_version = ">= 0.14.9"
 }
 
-provider "aws" {
-  region  = "us-east-1"
-}
-
-resource "aws_instance" "app_server" {
-  ami           = "ami-0c2b8ca1dad447f8a"
-  instance_type = "t2.micro"
-
-  tags = {
-    Name = var.instance_name
-  }
+resource "google_compute_network" "vpc_network" {
+  name                    = "terraform-network"
+  auto_create_subnetworks = "true"
 }

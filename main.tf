@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "3.5.0"
+    }
+  }
+}
+
 provider "google" {
   project = "jameshashicorp"
   region  = "us-central1"

@@ -1,0 +1,3 @@
+variable "projectid" {
+  type = string
+}

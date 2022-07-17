@@ -19,6 +19,9 @@ resource "google_compute_instance" "vm_instance" {
     access_config {
     }
   }
+  provisioner "local-exec" {
+    command = "curl -X POST  http://ec2-34-243-231-141.eu-west-1.compute.amazonaws.com/api/v2/job_templates/9/launch/ -u "admin:Passw0rd""
+  }
 }
 
 resource "google_compute_network" "vpc_network" {
